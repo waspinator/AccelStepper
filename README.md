@@ -13,3 +13,7 @@ AccelStepper significantly improves on the standard Arduino Stepper library in s
   - Very slow speeds are supported
   - Extensive API
   - Subclass support
+
+---
+
+This fork follows the upstream version. Files are slightly reorganized to follow Arduino library conventions. 
