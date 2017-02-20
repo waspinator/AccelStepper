@@ -4,12 +4,12 @@ The standard Arduino IDE includes the Stepper library (http://arduino.cc/en/Refe
 
 AccelStepper significantly improves on the standard Arduino Stepper library in several ways:
 
-    Supports acceleration and deceleration
-    Supports multiple simultaneous steppers, with independent concurrent stepping on each stepper
-    API functions never delay() or block
-    Supports 2, 3 and 4 wire steppers, plus 3 and 4 wire half steppers.
-    Supports alternate stepping functions to enable support of AFMotor (https://github.com/adafruit/Adafruit-Motor-Shield-library)
-    Supports stepper drivers such as the Sparkfun EasyDriver (based on 3967 driver chip)
-    Very slow speeds are supported
-    Extensive API
-    Subclass support
+  - Supports acceleration and deceleration
+  - Supports multiple simultaneous steppers, with independent concurrent stepping on each stepper
+  - API functions never delay() or block
+  - Supports 2, 3 and 4 wire steppers, plus 3 and 4 wire half steppers.
+  - Supports alternate stepping functions to enable support of AFMotor (https://github.com/adafruit/Adafruit-Motor-Shield-library)
+  - Supports stepper drivers such as the Sparkfun EasyDriver (based on 3967 driver chip)
+  - Very slow speeds are supported
+  - Extensive API
+  - Subclass support
