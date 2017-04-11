@@ -23,7 +23,7 @@
 /// The latest version of this documentation can be downloaded from 
 /// http://www.airspayce.com/mikem/arduino/AccelStepper
 /// The version of the package that this documentation refers to can be downloaded 
-/// from http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.56.zip
+/// from http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.57.zip
 ///
 /// Example Arduino programs are included to show the main modes of use.
 ///
@@ -95,7 +95,7 @@
 /// \par Commercial Licensing
 /// This is the appropriate option if you are creating proprietary applications
 /// and you are not prepared to distribute and share the source code of your
-/// application. Purchase commercial licenses at http://airspayce.binpress.com/product/accelstepper/3846
+/// application. Purchase commercial licenses at http://airspayce.binpress.com/
 ///
 /// \par Revision History
 /// \version 1.0 Initial release
@@ -237,6 +237,9 @@
 /// \version 1.56 2017-02-03
 ///                Fixed minor documentation error with DIRECTION_CCW and DIRECTION_CW. Reported by David Mutterer.
 ///                Added link to Binpress commercial license purchasing.
+/// \version 1.57 2017-03-28
+///                _direction moved to protected at the request of Rudy Ercek.
+///                setMaxSpeed() and setAcceleration() now correct negative values to be positive.
 ///
 /// \author  Mike McCauley (mikem@airspayce.com) DO NOT CONTACT THE AUTHOR DIRECTLY: USE THE LISTS
 // Copyright (C) 2009-2013 Mike McCauley
@@ -590,6 +593,10 @@ protected:
     /// \param[in] step The current step phase number (0 to 7)
     virtual void   step8(long step);
 
+    /// Current direction motor is spinning in
+    /// Protected because some peoples subclasses need it to be so
+    boolean _direction; // 1 == CW
+    
 private:
     /// Number of pins on the stepper motor. Permits 2 or 4. 2 pins is a
     /// bipolar, and 4 pins is a unipolar.
@@ -661,9 +668,6 @@ private:
 
     /// Min step size in microseconds based on maxSpeed
     float _cmin; // at max speed
-
-    /// Current direction motor is spinning in
-    boolean _direction; // 1 == CW
 
 };
 
