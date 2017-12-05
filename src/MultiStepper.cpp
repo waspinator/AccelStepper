@@ -48,6 +48,44 @@ void MultiStepper::moveTo(long absolute[])
     }
 }
 
+void MultiStepper::reset(){
+    uint8_t i;
+    for (i = 0; i < _num_steppers; i++)
+    {
+        _steppers[i]->setCurrentPosition(0);
+    }
+}
+
+void MultiStepper::move(long relative[])
+{
+    // First find the stepper that will take the longest time to move
+    float longestTime = 0.0;
+
+    uint8_t i;
+    for (i = 0; i < _num_steppers; i++)
+    {
+        float thisTime = abs(relative[i]) / _steppers[i]->maxSpeed();
+
+        if (thisTime > longestTime)
+            longestTime = thisTime;
+    }
+
+    if (longestTime > 0.0)
+    {
+        // Now work out a new max speed for each stepper so they will all
+        // arrived at the same time of longestTime
+        for (i = 0; i < _num_steppers; i++)
+        {
+            float thisSpeed = relative[i] / longestTime;
+            _steppers[i]->move(relative[i]); // New target position (resets speed)
+            _steppers[i]->setSpeed(thisSpeed); // New speed
+        }
+    }
+}
+
+
+
+
 // Returns true if any motor is still running to the target position.
 boolean MultiStepper::run()
 {

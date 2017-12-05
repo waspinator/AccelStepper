@@ -50,6 +50,18 @@ public:
     /// the absolute position of the first stepper added by addStepper() etc. The array must be at least as long as 
     /// the number of steppers that have been added by addStepper, else results are undefined.
     void moveTo(long absolute[]);
+   
+    /// Set the target positions of all managed steppers 
+    /// according to a coordinate array.
+    /// New speeds will be computed for each stepper so they will all arrive at their 
+    /// respective targets at very close to the same time.
+    /// \param[in] relative An array of desired relative stepper positions. relative[0] will be used to set
+    /// the relative position of the first stepper added by addStepper() etc. The array must be at least as long as 
+    /// the number of steppers that have been added by addStepper, else results are undefined.
+    void move(long relative[]);
+    
+    /// Sets current position to zero for all steppers and stops them. 
+    void reset();
     
     /// Calls runSpeed() on all the managed steppers
     /// that have not acheived their target position.
