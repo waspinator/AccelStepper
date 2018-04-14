@@ -204,7 +204,8 @@ AccelStepper::AccelStepper(uint8_t interface, uint8_t pin1, uint8_t pin2, uint8_
     _pin[1] = pin2;
     _pin[2] = pin3;
     _pin[3] = pin4;
-
+    _enableInverted = false;
+    
     // NEW
     _n = 0;
     _c0 = 0.0;
