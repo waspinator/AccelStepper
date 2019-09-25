@@ -23,7 +23,7 @@
 /// The latest version of this documentation can be downloaded from 
 /// http://www.airspayce.com/mikem/arduino/AccelStepper
 /// The version of the package that this documentation refers to can be downloaded 
-/// from http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.58.zip
+/// from http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.59.zip
 ///
 /// Example Arduino programs are included to show the main modes of use.
 ///
@@ -81,7 +81,7 @@
 ///
 /// \par Copyright
 ///
-/// This software is Copyright (C) 2010 Mike McCauley. Use is subject to license
+/// This software is Copyright (C) 2010-2018 Mike McCauley. Use is subject to license
 /// conditions. The main licensing options available are GPL V2 or Commercial:
 ///
 /// \par Open Source Licensing GPL V2
@@ -95,7 +95,7 @@
 /// \par Commercial Licensing
 /// This is the appropriate option if you are creating proprietary applications
 /// and you are not prepared to distribute and share the source code of your
-/// application. Purchase commercial licenses at http://airspayce.binpress.com/
+/// application. To purchase a commercial license, contact info@airspayce.com
 ///
 /// \par Revision History
 /// \version 1.0 Initial release
@@ -158,7 +158,7 @@
 ///                oscillation about the target position.
 /// \version 1.27  Added stop() function to stop as fast as possible with current acceleration parameters.
 ///                Also added new Quickstop example showing its use.
-/// \version 1.28  Fixed another problem where certain combinations of speed and accelration could cause
+/// \version 1.28  Fixed another problem where certain combinations of speed and acceleration could cause
 ///                oscillation about the target position.
 ///                Added support for 3 wire full and half steppers such as Hard Disk Drive spindle.
 ///                Contributed by Yuri Ivatchkovitch.
@@ -242,6 +242,8 @@
 ///                setMaxSpeed() and setAcceleration() now correct negative values to be positive.
 /// \version 1.58 2018-04-13
 ///                Add initialisation for _enableInverted in constructor.
+/// \version 1.59 2018-08-28
+///                Update commercial licensing, remove binpress.
 ///
 /// \author  Mike McCauley (mikem@airspayce.com) DO NOT CONTACT THE AUTHOR DIRECTLY: USE THE LISTS
 // Copyright (C) 2009-2013 Mike McCauley
@@ -395,6 +397,7 @@ public:
     /// Sets the maximum permitted speed. The run() function will accelerate
     /// up to the speed set by this function.
     /// Caution: the maximum speed achievable depends on your processor and clock speed.
+    /// The default maxSpeed is 1.0 steps per second.
     /// \param[in] speed The desired maximum speed in steps per second. Must
     /// be > 0. Caution: Speeds that exceed the maximum speed supported by the processor may
     /// Result in non-linear accelerations and decelerations.
@@ -417,6 +420,7 @@ public:
     /// second are unreliable. Very slow speeds may be set (eg 0.00027777 for
     /// once per hour, approximately. Speed accuracy depends on the Arduino
     /// crystal. Jitter depends on how frequently you call the runSpeed() function.
+    /// The speed will be limited by the current value of setMaxSpeed()
     void    setSpeed(float speed);
 
     /// The most recently set speed

@@ -767,7 +767,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the maximum permitted speed. The <a class="el" href="classAccelStepper.html#a608b2395b64ac15451d16d0371fe13ce">run()</a> function will accelerate up to the speed set by this function. Caution: the maximum speed achievable depends on your processor and clock speed. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the maximum permitted speed. The <a class="el" href="classAccelStepper.html#a608b2395b64ac15451d16d0371fe13ce">run()</a> function will accelerate up to the speed set by this function. Caution: the maximum speed achievable depends on your processor and clock speed. The default maxSpeed is 1.0 steps per second. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">speed</td><td>The desired maximum speed in steps per second. Must be &gt; 0. Caution: Speeds that exceed the maximum speed supported by the processor may Result in non-linear accelerations and decelerations. </td></tr>
   </table>
@@ -948,7 +948,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Sets the desired constant speed for use with <a class="el" href="classAccelStepper.html#aa4a6bdf99f698284faaeb5542b0b7514">runSpeed()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">speed</td><td>The desired constant speed in steps per second. Positive is clockwise. Speeds of more than 1000 steps per second are unreliable. Very slow speeds may be set (eg 0.00027777 for once per hour, approximately. Speed accuracy depends on the Arduino crystal. Jitter depends on how frequently you call the <a class="el" href="classAccelStepper.html#aa4a6bdf99f698284faaeb5542b0b7514">runSpeed()</a> function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">speed</td><td>The desired constant speed in steps per second. Positive is clockwise. Speeds of more than 1000 steps per second are unreliable. Very slow speeds may be set (eg 0.00027777 for once per hour, approximately. Speed accuracy depends on the Arduino crystal. Jitter depends on how frequently you call the <a class="el" href="classAccelStepper.html#aa4a6bdf99f698284faaeb5542b0b7514">runSpeed()</a> function. The speed will be limited by the current value of <a class="el" href="classAccelStepper.html#abee8d466229b87accba33d6ec929c18f">setMaxSpeed()</a> </td></tr>
   </table>
   </dd>
 </dl>
