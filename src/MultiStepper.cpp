@@ -11,7 +11,7 @@ MultiStepper::MultiStepper()
 {
 }
 
-boolean MultiStepper::addStepper(AccelStepper& stepper)
+bool MultiStepper::addStepper(AccelStepper& stepper)
 {
     if (_num_steppers >= MULTISTEPPER_MAX_STEPPERS)
 	return false; // No room for more
@@ -49,10 +49,10 @@ void MultiStepper::moveTo(long absolute[])
 }
 
 // Returns true if any motor is still running to the target position.
-boolean MultiStepper::run()
+bool MultiStepper::run()
 {
     uint8_t i;
-    boolean ret = false;
+    bool ret = false;
     for (i = 0; i < _num_steppers; i++)
     {
 	if ( _steppers[i]->distanceToGo() != 0)
