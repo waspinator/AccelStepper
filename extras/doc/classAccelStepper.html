@@ -284,7 +284,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Constructor. You can have multiple simultaneous steppers, all moving at different speeds and accelerations, provided you call their <a class="el" href="classAccelStepper.html#a608b2395b64ac15451d16d0371fe13ce">run()</a> functions at frequent enough intervals. Current Position is set to 0, target position is set to 0. MaxSpeed and Acceleration default to 1.0. The motor pins will be initialised to OUTPUT mode during the constructor by a call to <a class="el" href="classAccelStepper.html#aa279a50d30d0413f570c692cff071643">enableOutputs()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">interface</td><td>Number of pins to interface to. Integer values are supported, but it is preferred to use the <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5">MotorInterfaceType</a> symbolic names. <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5ac3523e4cf6763ba518d16fec3708ef23" title="Stepper Driver, 2 driver pins required. ">AccelStepper::DRIVER</a> (1) means a stepper driver (with Step and Direction pins). If an enable line is also needed, call <a class="el" href="classAccelStepper.html#a56a81c5f00d02ca19646718e88e974c0">setEnablePin()</a> after construction. You may also invert the pins using <a class="el" href="classAccelStepper.html#ac62cae590c2f9c303519a3a1c4adc8ab">setPinsInverted()</a>. <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5a62a305b52f749ff8c89138273fbb012d" title="2 wire stepper, 2 motor pins required ">AccelStepper::FULL2WIRE</a> (2) means a 2 wire stepper (2 pins required). <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5a0b8eea5cf0f8ce70b1959d2977ccc996" title="3 wire stepper, such as HDD spindle, 3 motor pins required ">AccelStepper::FULL3WIRE</a> (3) means a 3 wire stepper, such as HDD spindle (3 pins required). <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5adedd394a375190a3df8d4519c0d4dc2f" title="4 wire full stepper, 4 motor pins required ">AccelStepper::FULL4WIRE</a> (4) means a 4 wire stepper (4 pins required). <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5a00c2387a5af43d8e97639699ab7a5c7f" title="3 wire half stepper, such as HDD spindle, 3 motor pins required ">AccelStepper::HALF3WIRE</a> (6) means a 3 wire half stepper, such as HDD spindle (3 pins required) <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5aecc0900c55b777d2e885581b8c434b07" title="4 wire half stepper, 4 motor pins required ">AccelStepper::HALF4WIRE</a> (8) means a 4 wire half stepper (4 pins required) Defaults to <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5adedd394a375190a3df8d4519c0d4dc2f" title="4 wire full stepper, 4 motor pins required ">AccelStepper::FULL4WIRE</a> (4) pins. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">interface</td><td>Number of pins to interface to. Integer values are supported, but it is preferred to use the <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5">MotorInterfaceType</a> symbolic names. <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5ac3523e4cf6763ba518d16fec3708ef23" title="Stepper Driver, 2 driver pins required. ">AccelStepper::DRIVER</a> (1) means a stepper driver (with Step and Direction pins). If an enable line is also needed, call <a class="el" href="classAccelStepper.html#a56a81c5f00d02ca19646718e88e974c0">setEnablePin()</a> after construction. You may also invert the pins using <a class="el" href="classAccelStepper.html#ac62cae590c2f9c303519a3a1c4adc8ab">setPinsInverted()</a>. Caution: DRIVER implements a blocking delay of minPulseWidth microseconds (default 1us) for each step. You can change this with <a class="el" href="classAccelStepper.html#af4d3818e691dad5dc518308796ccf154">setMinPulseWidth()</a>. <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5a62a305b52f749ff8c89138273fbb012d" title="2 wire stepper, 2 motor pins required ">AccelStepper::FULL2WIRE</a> (2) means a 2 wire stepper (2 pins required). <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5a0b8eea5cf0f8ce70b1959d2977ccc996" title="3 wire stepper, such as HDD spindle, 3 motor pins required ">AccelStepper::FULL3WIRE</a> (3) means a 3 wire stepper, such as HDD spindle (3 pins required). <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5adedd394a375190a3df8d4519c0d4dc2f" title="4 wire full stepper, 4 motor pins required ">AccelStepper::FULL4WIRE</a> (4) means a 4 wire stepper (4 pins required). <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5a00c2387a5af43d8e97639699ab7a5c7f" title="3 wire half stepper, such as HDD spindle, 3 motor pins required ">AccelStepper::HALF3WIRE</a> (6) means a 3 wire half stepper, such as HDD spindle (3 pins required) <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5aecc0900c55b777d2e885581b8c434b07" title="4 wire half stepper, 4 motor pins required ">AccelStepper::HALF4WIRE</a> (8) means a 4 wire half stepper (4 pins required) Defaults to <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5adedd394a375190a3df8d4519c0d4dc2f" title="4 wire full stepper, 4 motor pins required ">AccelStepper::FULL4WIRE</a> (4) pins. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pin1</td><td>Arduino digital pin number for motor pin 1. Defaults to pin 2. For a <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5ac3523e4cf6763ba518d16fec3708ef23" title="Stepper Driver, 2 driver pins required. ">AccelStepper::DRIVER</a> (interface==1), this is the Step input to the driver. Low to high transition means to step) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pin2</td><td>Arduino digital pin number for motor pin 2. Defaults to pin 3. For a <a class="el" href="classAccelStepper.html#a73bdecf1273d98d8c5fbcb764cabeea5ac3523e4cf6763ba518d16fec3708ef23" title="Stepper Driver, 2 driver pins required. ">AccelStepper::DRIVER</a> (interface==1), this is the Direction input the driver. High means forward. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pin3</td><td>Arduino digital pin number for motor pin 3. Defaults to pin 4. </td></tr>
@@ -385,7 +385,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The currently motor position. </p><dl class="section return"><dt>Returns</dt><dd>the current motor position in steps. Positive is clockwise from the 0 position. </dd></dl>
+<p>The current motor position. </p><dl class="section return"><dt>Returns</dt><dd>the current motor position in steps. Positive is clockwise from the 0 position. </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="classMultiStepper.html#a291fec32a79390b6eb00296cffac49ee">MultiStepper::moveTo()</a>.</p>
 
@@ -501,7 +501,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>returns the maximum speed configured for this stepper that was previously set by <a class="el" href="classAccelStepper.html#abee8d466229b87accba33d6ec929c18f">setMaxSpeed()</a>; </p><dl class="section return"><dt>Returns</dt><dd>The currently configured maximum speed </dd></dl>
+<p>Returns the maximum speed configured for this stepper that was previously set by <a class="el" href="classAccelStepper.html#abee8d466229b87accba33d6ec929c18f">setMaxSpeed()</a>; </p><dl class="section return"><dt>Returns</dt><dd>The currently configured maximum speed </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="classMultiStepper.html#a291fec32a79390b6eb00296cffac49ee">MultiStepper::moveTo()</a>.</p>
 
@@ -522,7 +522,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the target position relative to the current position </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Set the target position relative to the current position. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">relative</td><td>The desired position relative to the current position. Negative is anticlockwise from the current position. </td></tr>
   </table>
@@ -577,7 +577,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Poll the motor and step it if a step is due, implementing accelerations and decelerations to acheive the target position. You must call this as frequently as possible, but at least once per minimum step time interval, preferably in your main loop. Note that each call to <a class="el" href="classAccelStepper.html#a608b2395b64ac15451d16d0371fe13ce">run()</a> will make at most one step, and then only when a step is due, based on the current speed and the time since the last step. </p><dl class="section return"><dt>Returns</dt><dd>true if the motor is still running to the target position. </dd></dl>
+<p>Poll the motor and step it if a step is due, implementing accelerations and decelerations to achieve the target position. You must call this as frequently as possible, but at least once per minimum step time interval, preferably in your main loop. Note that each call to <a class="el" href="classAccelStepper.html#a608b2395b64ac15451d16d0371fe13ce">run()</a> will make at most one step, and then only when a step is due, based on the current speed and the time since the last step. </p><dl class="section return"><dt>Returns</dt><dd>true if the motor is still running to the target position. </dd></dl>
 
 <p class="reference">References <a class="el" href="classAccelStepper.html#affbee789b5c19165846cf0409860ae79">computeNewSpeed()</a>, <a class="el" href="classAccelStepper.html#a748665c3962e66fbc0e9373eb14c69c1">distanceToGo()</a>, and <a class="el" href="classAccelStepper.html#aa4a6bdf99f698284faaeb5542b0b7514">runSpeed()</a>.</p>
 
@@ -621,7 +621,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Runs at the currently selected speed until the target position is reached Does not implement accelerations. </p><dl class="section return"><dt>Returns</dt><dd>true if it stepped </dd></dl>
+<p>Runs at the currently selected speed until the target position is reached. Does not implement accelerations. </p><dl class="section return"><dt>Returns</dt><dd>true if it stepped </dd></dl>
 
 <p class="reference">References <a class="el" href="classAccelStepper.html#a35162cdf8ed9a98f98984c177d5ade58">_direction</a>, <a class="el" href="classAccelStepper.html#a7468f91a925c689c3ba250f8d074d228a6959a4549f734bd771d418f995ba4fb4">DIRECTION_CCW</a>, <a class="el" href="classAccelStepper.html#a7468f91a925c689c3ba250f8d074d228ad604e0047f7cb47662c5a1cf6999337c">DIRECTION_CW</a>, and <a class="el" href="classAccelStepper.html#aa4a6bdf99f698284faaeb5542b0b7514">runSpeed()</a>.</p>
 
@@ -724,6 +724,8 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="reference">Referenced by <a class="el" href="classMultiStepper.html#a26c2f53b1e7ddf5d5dfb333f6fb7fb92">MultiStepper::run()</a>.</p>
 
 </div>
 </div>
@@ -973,7 +975,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The most recently set speed </p><dl class="section return"><dt>Returns</dt><dd>the most recent speed in steps per second </dd></dl>
+<p>The most recently set speed. </p><dl class="section return"><dt>Returns</dt><dd>the most recent speed in steps per second </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="classAccelStepper.html#abee8d466229b87accba33d6ec929c18f">setMaxSpeed()</a>, and <a class="el" href="classAccelStepper.html#ae79c49ad69d5ccc9da0ee691fa4ca235">setSpeed()</a>.</p>
 

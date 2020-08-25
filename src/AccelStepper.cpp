@@ -1,7 +1,7 @@
 // AccelStepper.cpp
 //
 // Copyright (C) 2009-2013 Mike McCauley
-// $Id: AccelStepper.cpp,v 1.23 2016/08/09 00:39:10 mikem Exp $
+// $Id: AccelStepper.cpp,v 1.24 2020/04/20 00:15:03 mikem Exp mikem $
 
 #include "AccelStepper.h"
 
@@ -613,7 +613,7 @@ void AccelStepper::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3In
 void AccelStepper::runToPosition()
 {
     while (run())
-	;
+	YIELD; // Let system housekeeping occur
 }
 
 boolean AccelStepper::runSpeedToPosition()

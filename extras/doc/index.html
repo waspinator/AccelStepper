@@ -46,7 +46,7 @@ $(function() {
 <p><a class="el" href="classAccelStepper.html" title="Support for stepper motors with acceleration etc. ">AccelStepper</a> significantly improves on the standard Arduino Stepper library in several ways: </p><ul>
 <li>Supports acceleration and deceleration </li>
 <li>Supports multiple simultaneous steppers, with independent concurrent stepping on each stepper </li>
-<li>API functions never delay() or block </li>
+<li>Most API functions never delay() or block (unless otherwise stated) </li>
 <li>Supports 2, 3 and 4 wire steppers, plus 3 and 4 wire half steppers. </li>
 <li>Supports alternate stepping functions to enable support of AFMotor (<a href="https://github.com/adafruit/Adafruit-Motor-Shield-library">https://github.com/adafruit/Adafruit-Motor-Shield-library</a>) </li>
 <li>Supports stepper drivers such as the Sparkfun EasyDriver (based on 3967 driver chip) </li>
@@ -54,7 +54,7 @@ $(function() {
 <li>Extensive API </li>
 <li>Subclass support</li>
 </ul>
-<p>The latest version of this documentation can be downloaded from <a href="http://www.airspayce.com/mikem/arduino/AccelStepper">http://www.airspayce.com/mikem/arduino/AccelStepper</a> The version of the package that this documentation refers to can be downloaded from <a href="http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.59.zip">http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.59.zip</a></p>
+<p>The latest version of this documentation can be downloaded from <a href="http://www.airspayce.com/mikem/arduino/AccelStepper">http://www.airspayce.com/mikem/arduino/AccelStepper</a> The version of the package that this documentation refers to can be downloaded from <a href="http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.61.zip">http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.61.zip</a></p>
 <p>Example Arduino programs are included to show the main modes of use.</p>
 <p>You can also find online help and discussion at <a href="http://groups.google.com/group/accelstepper">http://groups.google.com/group/accelstepper</a> Please use that group for all questions and discussions on this topic. Do not contact the author directly, unless it is to discuss commercial licensing. Before asking a question or reporting a bug, please read</p><ul>
 <li><a href="http://en.wikipedia.org/wiki/Wikipedia:Reference_desk/How_to_ask_a_software_question">http://en.wikipedia.org/wiki/Wikipedia:Reference_desk/How_to_ask_a_software_question</a></li>
@@ -74,8 +74,8 @@ $(function() {
 <dl class="section user"><dt>Trademarks</dt><dd></dd></dl>
 <p><a class="el" href="classAccelStepper.html" title="Support for stepper motors with acceleration etc. ">AccelStepper</a> is a trademark of AirSpayce Pty Ltd. The <a class="el" href="classAccelStepper.html" title="Support for stepper motors with acceleration etc. ">AccelStepper</a> mark was first used on April 26 2010 for international trade, and is used only in relation to motor control hardware and software. It is not to be confused with any other similar marks covering other goods and services.</p>
 <dl class="section user"><dt>Copyright</dt><dd></dd></dl>
-<p>This software is Copyright (C) 2010-2018 Mike McCauley. Use is subject to license conditions. The main licensing options available are GPL V2 or Commercial:</p>
-<dl class="section user"><dt>Open Source Licensing GPL V2</dt><dd>This is the appropriate option if you want to share the source code of your application with everyone you distribute it to, and you also want to give them the right to share who uses it. If you wish to use this software under Open Source Licensing, you must contribute all your source code to the open source community in accordance with the GPL Version 2 when your application is distributed. See <a href="https://www.gnu.org/licenses/gpl-2.0.html">https://www.gnu.org/licenses/gpl-2.0.html</a></dd></dl>
+<p>This software is Copyright (C) 2010-2018 Mike McCauley. Use is subject to license conditions. The main licensing options available are GPL V3 or Commercial:</p>
+<dl class="section user"><dt>Open Source Licensing GPL V3</dt><dd>This is the appropriate option if you want to share the source code of your application with everyone you distribute it to, and you also want to give them the right to share who uses it. If you wish to use this software under Open Source Licensing, you must contribute all your source code to the open source community in accordance with the GPL Version 23 when your application is distributed. See <a href="https://www.gnu.org/licenses/gpl-3.0.html">https://www.gnu.org/licenses/gpl-3.0.html</a></dd></dl>
 <dl class="section user"><dt>Commercial Licensing</dt><dd>This is the appropriate option if you are creating proprietary applications and you are not prepared to distribute and share the source code of your application. To purchase a commercial license, contact <a href="#" onclick="location.href='mai'+'lto:'+'inf'+'o@'+'air'+'sp'+'ayc'+'e.'+'com'; return false;">info@<span style="display: none;">.nosp@m.</span>airs<span style="display: none;">.nosp@m.</span>payce<span style="display: none;">.nosp@m.</span>.com</a></dd></dl>
 <dl class="section user"><dt>Revision History</dt><dd></dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 Initial release</dd>
@@ -209,7 +209,11 @@ $(function() {
 <dd>
 1.58 2018-04-13 Add initialisation for _enableInverted in constructor. </dd>
 <dd>
-1.59 2018-08-28 Update commercial licensing, remove binpress.</dd></dl>
+1.59 2018-08-28 Update commercial licensing, remove binpress. </dd>
+<dd>
+1.60 2020-03-07 Release under GPL V3 </dd>
+<dd>
+1.61 2020-04-20 Added yield() call in runToPosition(), so that platforms like esp8266 dont hang/crash during long runs.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Mike McCauley (<a href="#" onclick="location.href='mai'+'lto:'+'mik'+'em'+'@ai'+'rs'+'pay'+'ce'+'.co'+'m'; return false;">mikem<span style="display: none;">.nosp@m.</span>@air<span style="display: none;">.nosp@m.</span>spayc<span style="display: none;">.nosp@m.</span>e.co<span style="display: none;">.nosp@m.</span>m</a>) DO NOT CONTACT THE AUTHOR DIRECTLY: USE THE LISTS </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

@@ -1,7 +1,7 @@
 // MultiStepper.cpp
 //
 // Copyright (C) 2015 Mike McCauley
-// $Id: MultiStepper.cpp,v 1.2 2015/10/04 05:16:38 mikem Exp $
+// $Id: MultiStepper.cpp,v 1.3 2020/04/20 00:15:03 mikem Exp mikem $
 
 #include "MultiStepper.h"
 #include "AccelStepper.h"
@@ -60,6 +60,19 @@ boolean MultiStepper::run()
 	    _steppers[i]->runSpeed();
 	    ret = true;
 	}
+	// Caution: it has een reported that if any motor is used with acceleration outside of
+	// MultiStepper, this code is necessary, you get 
+	// strange results where it moves in the wrong direction for a while then 
+	// slams back the correct way.
+#if 0
+	else
+	{
+	    // Need to call this to clear _stepInterval, _speed and _n 
+	    otherwise future calls will fail.
+		_steppers[i]->setCurrentPosition(_steppers[i]->currentPosition());
+	}
+#endif
+	
     }
     return ret;
 }
