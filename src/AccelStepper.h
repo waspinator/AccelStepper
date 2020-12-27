@@ -621,6 +621,7 @@ protected:
 private:
     /// Number of pins on the stepper motor. Permits 2 or 4. 2 pins is a
     /// bipolar, and 4 pins is a unipolar.
+ 
     uint8_t        _interface;          // 0, 1, 2, 4, 8, See MotorInterfaceType
 
     /// Arduino pin number assignments for the 2 or 4 pins required to interface to the
@@ -656,6 +657,9 @@ private:
 
     /// The last step time in microseconds
     unsigned long  _lastStepTime;
+    
+    /// the integral error correction
+    unsigned long _integralError;
 
     /// The minimum allowed pulse width in microseconds
     unsigned int   _minPulseWidth;
