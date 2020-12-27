@@ -44,24 +44,28 @@ boolean AccelStepper::runSpeed()
     if (!_stepInterval)
 	return false;
 
-    unsigned long time = micros();   
-    if (time - _lastStepTime >= _stepInterval)
+    unsigned long r_elsp= micros() - this->_lastStepTime; // software delay
+
+    if (this->_stepInterval <= r_elsp - this->_integralError)
     {
-	if (_direction == DIRECTION_CW)
-	{
-	    // Clockwise
-	    _currentPos += 1;
-	}
-	else
-	{
-	    // Anticlockwise  
-	    _currentPos -= 1;
-	}
-	step(_currentPos);
+        if (_direction == DIRECTION_CW)
+        {
+            // Clockwise
+            _currentPos += 1;
+        }
+        else
+        {
+            // Anticlockwise  
+            _currentPos -= 1;
+        }
+        step(_currentPos);
 
-	_lastStepTime = time; // Caution: does not account for costs in step()
+    
+        this->_lastStepTime = micros();
 
-	return true;
+        this->_integralError += this->_stepInterval- r_elsp ; //software error integreted
+
+        return true;
     }
     else
     {
@@ -92,6 +96,7 @@ void AccelStepper::setCurrentPosition(long position)
     _n = 0;
     _stepInterval = 0;
     _speed = 0.0;
+    this->_integralError = 0;
 }
 
 void AccelStepper::computeNewSpeed()
@@ -200,6 +205,7 @@ AccelStepper::AccelStepper(uint8_t interface, uint8_t pin1, uint8_t pin2, uint8_
     _minPulseWidth = 1;
     _enablePin = 0xff;
     _lastStepTime = 0;
+    this->_integralError =0;
     _pin[0] = pin1;
     _pin[1] = pin2;
     _pin[2] = pin3;
@@ -241,6 +247,7 @@ AccelStepper::AccelStepper(void (*forward)(), void (*backward)())
     _pin[3] = 0;
     _forward = forward;
     _backward = backward;
+    this->_integralError =0;
 
     // NEW
     _n = 0;
@@ -306,8 +313,12 @@ void AccelStepper::setSpeed(float speed)
     {
 	_stepInterval = fabs(1000000.0 / speed);
 	_direction = (speed > 0.0) ? DIRECTION_CW : DIRECTION_CCW;
+    
+    this->_integralError = 0;
     }
     _speed = speed;
+
+    
 }
 
 float AccelStepper::speed()
@@ -611,9 +622,12 @@ void AccelStepper::setPinsInverted(bool pin1Invert, bool pin2Invert, bool pin3In
 
 // Blocks until the target position is reached and stopped
 void AccelStepper::runToPosition()
-{
+{   
+    this->_integralError = 0;
     while (run())
 	YIELD; // Let system housekeeping occur
+
+    this->_integralError = 0 ;
 }
 
 boolean AccelStepper::runSpeedToPosition()
@@ -643,6 +657,8 @@ void AccelStepper::stop()
 	    move(stepsToStop);
 	else
 	    move(-stepsToStop);
+
+        this->_integralError = 0 ;
     }
 }
 
