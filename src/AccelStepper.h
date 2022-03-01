@@ -429,6 +429,11 @@ public:
     /// root to be calculated. Dont call more ofthen than needed
     void    setAcceleration(float acceleration);
 
+    /// Returns the acceleration/deceleration rate configured for this stepper
+    /// that was previously set by setAcceleration();
+    /// \return The currently configured acceleration/deceleration
+    float   acceleration();
+
     /// Sets the desired constant speed for use with runSpeed().
     /// \param[in] speed The desired constant speed in steps per
     /// second. Positive is clockwise. Speeds of more than 1000 steps per
@@ -471,7 +476,7 @@ public:
     /// position. Dont use this in event loops, since it blocks.
     void    runToPosition();
 
-    /// Runs at the currently selected speed until the target position is reached.
+    /// Runs at the currently selected speed unless the target position is reached.
     /// Does not implement accelerations.
     /// \return true if it stepped
     boolean runSpeedToPosition();
@@ -551,7 +556,8 @@ protected:
     /// \li  after change to acceleration through setAcceleration()
     /// \li  after change to target position (relative or absolute) through
     /// move() or moveTo()
-    void           computeNewSpeed();
+    /// \return the new step interval
+    virtual unsigned long computeNewSpeed();
 
     /// Low level function to set the motor output pins
     /// bit 0 of the mask corresponds to _pin[0]
@@ -566,6 +572,16 @@ protected:
     /// number of pins defined for the stepper.
     /// \param[in] step The current step phase number (0 to 7)
     virtual void   step(long step);
+
+    /// Called to execute a clockwise(+) step. Only called when a new step is
+    /// required. This increments the _currentPos and calls step()
+    /// \return the updated current position
+    long   stepForward();
+
+    /// Called to execute a counter-clockwise(-) step. Only called when a new step is
+    /// required. This decrements the _currentPos and calls step()
+    /// \return the updated current position
+    long   stepBackward();
 
     /// Called to execute a step using stepper functions (pins = 0) Only called when a new step is
     /// required. Calls _forward() or _backward() to perform the step
@@ -618,6 +634,10 @@ protected:
     /// Protected because some peoples subclasses need it to be so
     boolean _direction; // 1 == CW
     
+    /// The current interval between steps in microseconds.
+    /// 0 means the motor is currently stopped with _speed == 0
+    unsigned long  _stepInterval;
+
 private:
     /// Number of pins on the stepper motor. Permits 2 or 4. 2 pins is a
     /// bipolar, and 4 pins is a unipolar.
@@ -649,10 +669,6 @@ private:
     /// per second per second. Must be > 0
     float          _acceleration;
     float          _sqrt_twoa; // Precomputed sqrt(2*_acceleration)
-
-    /// The current interval between steps in microseconds.
-    /// 0 means the motor is currently stopped with _speed == 0
-    unsigned long  _stepInterval;
 
     /// The last step time in microseconds
     unsigned long  _lastStepTime;
