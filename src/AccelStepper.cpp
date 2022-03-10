@@ -94,7 +94,8 @@ void AccelStepper::setCurrentPosition(long position)
     _speed = 0.0;
 }
 
-void AccelStepper::computeNewSpeed()
+// Subclasses can override
+unsigned long AccelStepper::computeNewSpeed()
 {
     long distanceTo = distanceToGo(); // +ve is clockwise from curent location
 
@@ -106,7 +107,7 @@ void AccelStepper::computeNewSpeed()
 	_stepInterval = 0;
 	_speed = 0.0;
 	_n = 0;
-	return;
+	return _stepInterval;
     }
 
     if (distanceTo > 0)
@@ -174,6 +175,7 @@ void AccelStepper::computeNewSpeed()
     Serial.println(stepsToStop);
     Serial.println("-----");
 #endif
+    return _stepInterval;
 }
 
 // Run the motor to implement speed and acceleration in order to proceed to the target position
@@ -295,6 +297,11 @@ void AccelStepper::setAcceleration(float acceleration)
     }
 }
 
+float   AccelStepper::acceleration()
+{
+    return _acceleration;
+}
+
 void AccelStepper::setSpeed(float speed)
 {
     if (speed == _speed)
@@ -348,6 +355,24 @@ void AccelStepper::step(long step)
 	    step8(step);
 	    break;  
     }
+}
+
+long AccelStepper::stepForward()
+{
+    // Clockwise
+    _currentPos += 1;
+	step(_currentPos);
+	_lastStepTime = micros();
+    return _currentPos;
+}
+
+long AccelStepper::stepBackward()
+{
+    // Counter-clockwise
+    _currentPos -= 1;
+	step(_currentPos);
+	_lastStepTime = micros();
+    return _currentPos;
 }
 
 // You might want to override this to implement eg serial output
