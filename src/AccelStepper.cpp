@@ -359,6 +359,7 @@ void AccelStepper::step(long step)
 // bit 0 of the mask corresponds to _pin[0]
 // bit 1 of the mask corresponds to _pin[1]
 // ....
+ISR_ATTR
 void AccelStepper::setOutputPins(uint8_t mask)
 {
     uint8_t numpins = 2;

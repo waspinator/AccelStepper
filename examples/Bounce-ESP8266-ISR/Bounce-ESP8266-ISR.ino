@@ -44,5 +44,5 @@ void loop()
 
     sei(); // barrier ends
 
-    delay(1000); // ISR does not care long delays or WiFi operations
+    delay(1000); // ISR does not mind long delays or WiFi operations
 }
