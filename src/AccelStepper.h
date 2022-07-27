@@ -276,6 +276,13 @@
  #define YIELD
 #endif
 
+// on archs defining IRAM_ATTR (esp8266, esp32), use this attribute for functions callable from ISR
+#ifdef IRAM_ATTR
+ #define ISR_ATTR IRAM_ATTR
+#else
+ #define ISR_ATTR
+#endif
+
 /////////////////////////////////////////////////////////////////////
 /// \class AccelStepper AccelStepper.h <AccelStepper.h>
 /// \brief Support for stepper motors with acceleration etc.

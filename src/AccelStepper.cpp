@@ -38,6 +38,7 @@ void AccelStepper::move(long relative)
 // Implements steps according to the current step interval
 // You must call this at least once per step
 // returns true if a step occurred
+ISR_ATTR
 boolean AccelStepper::runSpeed()
 {
     // Dont do anything unless we actually have a step interval
@@ -69,6 +70,7 @@ boolean AccelStepper::runSpeed()
     }
 }
 
+ISR_ATTR
 long AccelStepper::distanceToGo()
 {
     return _targetPos - _currentPos;
@@ -94,6 +96,7 @@ void AccelStepper::setCurrentPosition(long position)
     _speed = 0.0;
 }
 
+ISR_ATTR
 void AccelStepper::computeNewSpeed()
 {
     long distanceTo = distanceToGo(); // +ve is clockwise from curent location
@@ -180,6 +183,7 @@ void AccelStepper::computeNewSpeed()
 // You must call this at least once per step, preferably in your main loop
 // If the motor is in the desired position, the cost is very small
 // returns true if the motor is still running to the target position.
+ISR_ATTR
 boolean AccelStepper::run()
 {
     if (runSpeed())
@@ -316,6 +320,7 @@ float AccelStepper::speed()
 }
 
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step(long step)
 {
     switch (_interface)
@@ -367,6 +372,7 @@ void AccelStepper::setOutputPins(uint8_t mask)
 }
 
 // 0 pin step function (ie for functional usage)
+ISR_ATTR
 void AccelStepper::step0(long step)
 {
     (void)(step); // Unused
@@ -379,6 +385,7 @@ void AccelStepper::step0(long step)
 // 1 pin step function (ie for stepper drivers)
 // This is passed the current step number (0 to 7)
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step1(long step)
 {
     (void)(step); // Unused
@@ -396,6 +403,7 @@ void AccelStepper::step1(long step)
 // 2 pin step function
 // This is passed the current step number (0 to 7)
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step2(long step)
 {
     switch (step & 0x3)
@@ -420,6 +428,7 @@ void AccelStepper::step2(long step)
 // 3 pin step function
 // This is passed the current step number (0 to 7)
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step3(long step)
 {
     switch (step % 3)
@@ -442,6 +451,7 @@ void AccelStepper::step3(long step)
 // 4 pin step function for half stepper
 // This is passed the current step number (0 to 7)
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step4(long step)
 {
     switch (step & 0x3)
@@ -467,6 +477,7 @@ void AccelStepper::step4(long step)
 // 3 pin half step function
 // This is passed the current step number (0 to 7)
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step6(long step)
 {
     switch (step % 6)
@@ -501,6 +512,7 @@ void AccelStepper::step6(long step)
 // 4 pin half step function
 // This is passed the current step number (0 to 7)
 // Subclasses can override
+ISR_ATTR
 void AccelStepper::step8(long step)
 {
     switch (step & 0x7)

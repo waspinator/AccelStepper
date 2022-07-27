@@ -49,6 +49,7 @@ void MultiStepper::moveTo(long absolute[])
 }
 
 // Returns true if any motor is still running to the target position.
+ISR_ATTR
 boolean MultiStepper::run()
 {
     uint8_t i;
