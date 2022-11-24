@@ -1,6 +1,6 @@
 // AccelStepper.cpp
 //
-// Copyright (C) 2009-2013 Mike McCauley
+// Copyright (C) 2009-2020 Mike McCauley
 // $Id: AccelStepper.cpp,v 1.24 2020/04/20 00:15:03 mikem Exp mikem $
 
 #include "AccelStepper.h"
@@ -94,7 +94,8 @@ void AccelStepper::setCurrentPosition(long position)
     _speed = 0.0;
 }
 
-void AccelStepper::computeNewSpeed()
+// Subclasses can override
+unsigned long AccelStepper::computeNewSpeed()
 {
     long distanceTo = distanceToGo(); // +ve is clockwise from curent location
 
@@ -106,7 +107,7 @@ void AccelStepper::computeNewSpeed()
 	_stepInterval = 0;
 	_speed = 0.0;
 	_n = 0;
-	return;
+	return _stepInterval;
     }
 
     if (distanceTo > 0)
@@ -174,6 +175,7 @@ void AccelStepper::computeNewSpeed()
     Serial.println(stepsToStop);
     Serial.println("-----");
 #endif
+    return _stepInterval;
 }
 
 // Run the motor to implement speed and acceleration in order to proceed to the target position
@@ -193,7 +195,7 @@ AccelStepper::AccelStepper(uint8_t interface, uint8_t pin1, uint8_t pin2, uint8_
     _currentPos = 0;
     _targetPos = 0;
     _speed = 0.0;
-    _maxSpeed = 1.0;
+    _maxSpeed = 0.0;
     _acceleration = 0.0;
     _sqrt_twoa = 1.0;
     _stepInterval = 0;
@@ -220,6 +222,7 @@ AccelStepper::AccelStepper(uint8_t interface, uint8_t pin1, uint8_t pin2, uint8_
 	enableOutputs();
     // Some reasonable default
     setAcceleration(1);
+    setMaxSpeed(1);
 }
 
 AccelStepper::AccelStepper(void (*forward)(), void (*backward)())
@@ -228,7 +231,7 @@ AccelStepper::AccelStepper(void (*forward)(), void (*backward)())
     _currentPos = 0;
     _targetPos = 0;
     _speed = 0.0;
-    _maxSpeed = 1.0;
+    _maxSpeed = 0.0;
     _acceleration = 0.0;
     _sqrt_twoa = 1.0;
     _stepInterval = 0;
@@ -254,6 +257,7 @@ AccelStepper::AccelStepper(void (*forward)(), void (*backward)())
 	_pinInverted[i] = 0;
     // Some reasonable default
     setAcceleration(1);
+    setMaxSpeed(1);
 }
 
 void AccelStepper::setMaxSpeed(float speed)
@@ -293,6 +297,11 @@ void AccelStepper::setAcceleration(float acceleration)
 	_acceleration = acceleration;
 	computeNewSpeed();
     }
+}
+
+float   AccelStepper::acceleration()
+{
+    return _acceleration;
 }
 
 void AccelStepper::setSpeed(float speed)
@@ -348,6 +357,24 @@ void AccelStepper::step(long step)
 	    step8(step);
 	    break;  
     }
+}
+
+long AccelStepper::stepForward()
+{
+    // Clockwise
+    _currentPos += 1;
+	step(_currentPos);
+	_lastStepTime = micros();
+    return _currentPos;
+}
+
+long AccelStepper::stepBackward()
+{
+    // Counter-clockwise
+    _currentPos -= 1;
+	step(_currentPos);
+	_lastStepTime = micros();
+    return _currentPos;
 }
 
 // You might want to override this to implement eg serial output
