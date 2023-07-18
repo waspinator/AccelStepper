@@ -601,6 +601,10 @@ void    AccelStepper::enableOutputs()
         pinMode(_enablePin, OUTPUT);
         digitalWrite(_enablePin, HIGH ^ _enableInverted);
     }
+
+    // Ensure pins are updated for the current position to make sure
+    // motor is powered following disableOutputs().
+    step(_currentPos);
 }
 
 void AccelStepper::setMinPulseWidth(unsigned int minWidth)
