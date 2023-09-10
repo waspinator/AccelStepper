@@ -99,7 +99,7 @@ unsigned long AccelStepper::computeNewSpeed()
 {
     long distanceTo = distanceToGo(); // +ve is clockwise from curent location
 
-    long stepsToStop = (long)((_speed * _speed) / (2.0 * _acceleration)); // Equation 16
+    long stepsToStop = abs(_n); // Equation 16
 
     if (distanceTo == 0 && stepsToStop <= 1)
     {
@@ -155,7 +155,7 @@ unsigned long AccelStepper::computeNewSpeed()
     else
     {
 	// Subsequent step. Works for accel (n is +_ve) and decel (n is -ve).
-	_cn = _cn - ((2.0 * _cn) / ((4.0 * _n) + 1)); // Equation 13
+	_cn = ((2.0 * _c0) / ((4.0 * _n) + 1)); // Equation 13
 	_cn = max(_cn, _cmin); 
     }
     _n++;
