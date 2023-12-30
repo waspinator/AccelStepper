@@ -437,8 +437,8 @@ public:
     float   maxSpeed();
 
     /// Sets the acceleration/deceleration rate.
-    /// \param[in] acceleration The desired acceleration in steps per second
-    /// per second. Must be > 0.0. This is an expensive call since it requires a square 
+    /// \param[in] acceleration The desired acceleration in steps per second.
+    /// Must be > 0.0. This is an expensive call since it requires a square 
     /// root to be calculated. Dont call more ofthen than needed
     void    setAcceleration(float acceleration);
 
@@ -684,7 +684,7 @@ private:
     float          _maxSpeed;
 
     /// The acceleration to use to accelerate or decelerate the motor in steps
-    /// per second per second. Must be > 0
+    /// per second. Must be > 0
     float          _acceleration;
     float          _sqrt_twoa; // Precomputed sqrt(2*_acceleration)
 
